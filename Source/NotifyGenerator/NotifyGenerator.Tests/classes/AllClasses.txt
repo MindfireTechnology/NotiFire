@@ -1,0 +1,116 @@
+﻿using NotifyGenerator;
+
+namespace Tester.Models
+{
+	[MapClassTo(typeof(Tester.Data.Entities.Order), MethodName = "ToOrderEntity", Reverse = true, ReverseMethodName = "ToOrderModel")]
+	[MapClassTo(typeof(Tester.ViewModels.Order), MethodName = "ToOrderVM")]
+	public class Order
+	{
+		public int Id { get; set; }
+		public decimal Total { get; set; }
+		public string CustomerName { get; set; }
+	}
+
+	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
+	public class CustomUserDTO
+	{
+		public int Id { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string ZipCode { get; set; }
+		public string Phone { get; set; }
+	}
+
+	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
+	public class DifferingNamesDTO
+	{
+		[MapMemberTo(typeof(Tester.Data.Entities.SimpleUserEntity), Name = "Id")]
+		public int DifferingNamesId { get; set; }
+
+		[MapMemberTo(typeof(Tester.Data.Entities.SimpleUserEntity), Name = "Name")]
+		public string FullName { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string ZipCode { get; set; }
+		public string Phone { get; set; }
+	}
+
+	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
+	[MapClassFrom(typeof(SimpleUserDTO))]
+	public class MapFromDTO
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string ZipCode { get; set; }
+		public string Phone { get; set; }
+	}
+
+	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity), Reverse = true)]
+	public class ReverseMappingDTO
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string ZipCode { get; set; }
+		public string Phone { get; set; }
+	}
+
+	[MapClassTo(typeof(Tester.ViewModels.SimpleUserViewModel))]
+	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
+	public class SimpleUserDTO
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string ZipCode { get; set; }
+		public string Phone { get; set; }
+	}
+}
+
+namespace Tester.Data.Entities
+{
+	[MapClassTo(typeof(Tester.Models.Order))]
+	public class Order
+	{
+		public int Id { get; set; }
+		public decimal Total { get; set; }
+		public string CustomerName { get; set; }
+	}
+
+	public class SimpleUserEntity
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string ZipCode { get; set; }
+		public string Phone { get; set; }
+	}
+}
+
+namespace Tester.ViewModels
+{
+	[MapClassFrom(typeof(Tester.Models.Order), MethodName = "MapToOrderVM", Reverse = true, ReverseMethodName = "MapToOrderModel")]
+	public class Order
+	{
+		public int Id { get; set; }
+		public decimal Total { get; set; }
+		public string CustomerName { get; set; }
+	}
+
+	public class SimpleUserViewModel
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string ZipCode { get; set; }
+		public string Phone { get; set; }
+	}
+}

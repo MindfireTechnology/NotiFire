@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+		<LangVersion>9</LangVersion>
+
+		<AssemblyName>NotifyGenerator</AssemblyName>
+		<Version>1.0.0</Version>
+		<Description>NotifyGenerator is a source generator that generates INotifyPropertyChanged implementations for indicated classes.</Description>
+		<PackageTags>CodeGenerators, notify, INotifyPropertyChanged, property changed</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<!-- Generates a package at build -->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeSymbols>true</IncludeSymbols>
+
+		<!-- Do not include the generator as a lib dependency -->
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<PackageProjectUrl>https://github.com/MindfireTechnology/NotifyGenerator</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/MindfireTechnology/NotifyGenerator</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Copyright />
+		<Authors>Dan Beus, Nate Zaugg</Authors>
+		<Company>Mindfire Technology</Company>
+		<PackageIcon>Logo.png</PackageIcon>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DocumentationFile>bin\Release\MapTo.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="bin\**" />
+	  <EmbeddedResource Remove="bin\**" />
+	  <None Remove="bin\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>$(AssemblyName).Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="bin\Release\netstandard2.0\NotifyGenerator.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+		<None Include="..\..\..\Resources\Logo.png">
+		  <Pack>True</Pack>
+		  <PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>
