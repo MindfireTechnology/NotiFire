@@ -5,20 +5,19 @@
 		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
 		<LangVersion>9</LangVersion>
 
-		<AssemblyName>NotifyGenerator</AssemblyName>
+		<AssemblyName>NotiFire</AssemblyName>
 		<Version>1.0.0</Version>
-		<Description>NotifyGenerator is a source generator that generates INotifyPropertyChanged implementations for indicated classes.</Description>
-		<PackageTags>CodeGenerators, notify, INotifyPropertyChanged, property changed</PackageTags>
+		<Description>NotiFire is a source generator that generates INotifyPropertyChanged implementations for indicated classes.</Description>
+		<PackageTags>CodeGenerators, notify, INotifyPropertyChanged, property changed, Mindfire</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 
 		<!-- Generates a package at build -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<IncludeSymbols>true</IncludeSymbols>
 
 		<!-- Do not include the generator as a lib dependency -->
 		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<PackageProjectUrl>https://github.com/MindfireTechnology/NotifyGenerator</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/MindfireTechnology/NotifyGenerator</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/MindfireTechnology/NotiFire</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/MindfireTechnology/NotiFire</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Copyright />
 		<Authors>Dan Beus, Nate Zaugg</Authors>
@@ -26,6 +25,13 @@
 		<PackageIcon>Logo.png</PackageIcon>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
+		<PackageId>NotiFire</PackageId>
+		<Product>NotiFire</Product>
+		<RootNamespace>NotiFire</RootNamespace>
+		<PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

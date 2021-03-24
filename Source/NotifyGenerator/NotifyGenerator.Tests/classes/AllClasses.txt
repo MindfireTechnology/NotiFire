@@ -1,116 +1,149 @@
 ﻿using NotifyGenerator;
 
-namespace Tester.Models
+namespace Tester.Models.AllFields
 {
-	[MapClassTo(typeof(Tester.Data.Entities.Order), MethodName = "ToOrderEntity", Reverse = true, ReverseMethodName = "ToOrderModel")]
-	[MapClassTo(typeof(Tester.ViewModels.Order), MethodName = "ToOrderVM")]
+	[Notify]
 	public class Order
 	{
-		public int Id { get; set; }
-		public decimal Total { get; set; }
-		public string CustomerName { get; set; }
+		public int IdField;
+		public decimal TotalField;
+		public string CustomerNameField;
+		public DateTime Created {get;set;}
+		public int OrderId => IdField;
 	}
 
-	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
-	public class CustomUserDTO
+	[Notify]
+	public class User
 	{
-		public int Id { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string ZipCode { get; set; }
-		public string Phone { get; set; }
+		public int _Id;
+		public string _FirstName;
+		public string _LastName;
+		public string _Address;
+		public string _City;
+		public string _ZipCode;
+		public string _Phone;
 	}
 
-	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
-	public class DifferingNamesDTO
+	[Notify]
+	public class Purchase
 	{
-		[MapMemberTo(typeof(Tester.Data.Entities.SimpleUserEntity), Name = "Id")]
-		public int DifferingNamesId { get; set; }
-
-		[MapMemberTo(typeof(Tester.Data.Entities.SimpleUserEntity), Name = "Name")]
-		public string FullName { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string ZipCode { get; set; }
-		public string Phone { get; set; }
-	}
-
-	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
-	[MapClassFrom(typeof(SimpleUserDTO))]
-	public class MapFromDTO
-	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string ZipCode { get; set; }
-		public string Phone { get; set; }
-	}
-
-	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity), Reverse = true)]
-	public class ReverseMappingDTO
-	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string ZipCode { get; set; }
-		public string Phone { get; set; }
-	}
-
-	[MapClassTo(typeof(Tester.ViewModels.SimpleUserViewModel))]
-	[MapClassTo(typeof(Tester.Data.Entities.SimpleUserEntity))]
-	public class SimpleUserDTO
-	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string ZipCode { get; set; }
-		public string Phone { get; set; }
+		public int Id;
+		public DateTime Created;
+		public string Comment;
 	}
 }
 
-namespace Tester.Data.Entities
+namespace Tester.Models.AllFields.Exclude
 {
-	[MapClassTo(typeof(Tester.Models.Order))]
+	[Notify]
 	public class Order
 	{
-		public int Id { get; set; }
-		public decimal Total { get; set; }
-		public string CustomerName { get; set; }
+		public int IdField;
+		public decimal TotalField;
+
+		[Exclude]
+		public string CustomerNameField;
+
+		public DateTime Created {get;set;}
+		public int OrderId => IdField;
 	}
 
-	public class SimpleUserEntity
+	[Notify]
+	public class User
 	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string ZipCode { get; set; }
-		public string Phone { get; set; }
+		public int _Id;
+		public string _FirstName;
+		public string _LastName;
+		public string _Address;
+		public string _City;
+		public string _ZipCode;
+		public string _Phone;
+	}
+
+	[Notify]
+	public class Purchase
+	{
+		public int Id;
+		public DateTime Created;
+		public string Comment;
 	}
 }
 
-namespace Tester.ViewModels
+namespace Tester.Models.SpecificFields
 {
-	[MapClassFrom(typeof(Tester.Models.Order), MethodName = "MapToOrderVM", Reverse = true, ReverseMethodName = "MapToOrderModel")]
 	public class Order
 	{
-		public int Id { get; set; }
-		public decimal Total { get; set; }
-		public string CustomerName { get; set; }
+		public int IdField;
+
+		[Notify]
+		public decimal TotalField;
+
+		[Notify(PropertyName = "Customer")]
+		public string CustomerNameField;
+
+		public DateTime Created {get;set;}
+		public int OrderId => IdField;
 	}
 
-	public class SimpleUserViewModel
+	public class User
 	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string ZipCode { get; set; }
-		public string Phone { get; set; }
+		[Notify]
+		public int _Id;
+		[Notify]
+		public string _FirstName;
+		[Notify]
+		public string _LastName;
+		[Notify]
+		public string _Address;
+		[Notify]
+		public string _City;
+		[Notify]
+		public string _ZipCode;
+		[Notify]
+		public string _Phone;
+	}
+
+	public class Purchase
+	{
+		public int Id;
+		[Notify]
+		public DateTime Created;
+		[Notify]
+		public string Comment;
+	}
+}
+
+namespace Tester.Models.HasInterface
+{
+	using System.ComponentModel;
+
+	public class Order : System.ComponentModel.INotifyPropertyChanged
+	{
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public int IdField;
+
+		[Notify]
+		public decimal TotalField;
+
+		[Notify(PropertyName = "Customer")]
+		public string CustomerNameField;
+
+		public DateTime Created {get;set;}
+		public int OrderId => IdField;
+	}
+
+	[Notify]
+	public class User : System.ComponentModel.INotifyPropertyChanged
+	{
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public int _Id;
+		public string _FirstName;
+		public string _LastName;
+		public string _Address;
+		public string _City;
+		public string _ZipCode;
+		public string _Phone;
 	}
 }
