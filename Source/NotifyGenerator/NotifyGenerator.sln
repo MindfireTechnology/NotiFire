@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotifyGenerator", "NotifyGenerator\NotifyGenerator.csproj", "{69654738-CCDE-4191-B882-A4570BB06AF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyGenerator.Tests", "NotifyGenerator.Tests\NotifyGenerator.Tests.csproj", "{5581A813-7DEC-4C39-89BB-CBB1C5E13528}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotifyGenerator.Tests", "NotifyGenerator.Tests\NotifyGenerator.Tests.csproj", "{5581A813-7DEC-4C39-89BB-CBB1C5E13528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotiFire.Abstractions", "NotiFire.Abstractions\NotiFire.Abstractions.csproj", "{68F4669F-E0D7-4CD8-9BE8-C5D81D1D5310}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5581A813-7DEC-4C39-89BB-CBB1C5E13528}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5581A813-7DEC-4C39-89BB-CBB1C5E13528}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5581A813-7DEC-4C39-89BB-CBB1C5E13528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68F4669F-E0D7-4CD8-9BE8-C5D81D1D5310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68F4669F-E0D7-4CD8-9BE8-C5D81D1D5310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68F4669F-E0D7-4CD8-9BE8-C5D81D1D5310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68F4669F-E0D7-4CD8-9BE8-C5D81D1D5310}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,45 +12,6 @@ namespace NotiFire
 	[Generator]
 	public class NotifyImplementationGenerator : ISourceGenerator
 	{
-
-		private static readonly DiagnosticDescriptor NestedClassWarning = new DiagnosticDescriptor(
-			id: "NotiFireGEN001",
-			title: "Nested Classes Are Not Supported",
-			messageFormat: "Classes that are defined inside of another class (nested classes) are not supported",
-			category: "NotiFireGenerator",
-			DiagnosticSeverity.Warning,
-			isEnabledByDefault: true);
-
-		protected const string NotifyAttribute = @"
-using System;
-namespace NotiFire
-{
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public sealed class NotifyAttribute : Attribute
-	{
-		public string PropertyName { get; set; }
-
-		public NotifyAttribute()
-		{
-		}
-	}
-}
-";
-
-		protected const string ExcludeAttribute = @"
-using System;
-namespace NotiFire
-{
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public sealed class ExcludeAttribute : Attribute
-	{
-		public ExcludeAttribute()
-		{
-		}
-	}
-}
-";
-
 		public void Initialize(GeneratorInitializationContext context)
 		{
 			context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
@@ -58,20 +19,15 @@ namespace NotiFire
 
 		public void Execute(GeneratorExecutionContext context)
 		{
-			context.AddSource(nameof(NotifyAttribute), SourceText.From(NotifyAttribute, Encoding.UTF8));
-			context.AddSource(nameof(ExcludeAttribute), SourceText.From(ExcludeAttribute, Encoding.UTF8));
 
 			if (context.SyntaxReceiver is not SyntaxReceiver receiver)
 				return;
 
-			// create a new compilation that contains the attribute
-			var options = (context.Compilation as CSharpCompilation).SyntaxTrees[0].Options as CSharpParseOptions;
-			var compilation = context.Compilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText(SourceText.From(NotifyAttribute, Encoding.UTF8), options));
-			compilation = compilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText(SourceText.From(ExcludeAttribute, Encoding.UTF8), options));
+			var compilation = context.Compilation;
 
 			// get the newly bound attribute
-			var notifyAttributeSymbol = compilation.GetTypeByMetadataName("NotiFire.NotifyAttribute");
-			var excludeAttributeSymbol = compilation.GetTypeByMetadataName("NotiFire.ExcludeAttribute");
+			var notifyAttributeSymbol = compilation.GetTypeByMetadataName("NotiFire.Abstractions.NotifyAttribute");
+			var excludeAttributeSymbol = compilation.GetTypeByMetadataName("NotiFire.Abstractions.ExcludeAttribute");
 			var notifyInterfaceSymbol = context.Compilation.GetTypeByMetadataName("System.ComponentModel.INotifyPropertyChanged");
 
 			foreach (var classSyntax in receiver.Classes)

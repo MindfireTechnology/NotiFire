@@ -29,7 +29,7 @@ namespace NotifyGenerator.Tests
 			var outputDiag = outputCompilation.GetDiagnostics();
 			//outputDiag.IsEmpty.ShouldBeTrue();
 
-			var allClasses = outputCompilation.SyntaxTrees.Where(st => st.FilePath.EndsWith("Notify.g.cs"));
+			var allClasses = outputCompilation.SyntaxTrees.Where(st => st.FilePath.EndsWith(".Notify.g.cs"));
 
 			allClasses.ShouldNotBeNull("No classes were generated");
 
