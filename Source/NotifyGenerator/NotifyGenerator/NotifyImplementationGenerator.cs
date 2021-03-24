@@ -58,9 +58,10 @@ namespace NotiFire
 		{
 			var classNotifyAttributes = classSymbol.GetAttributes().Where(a => a.AttributeClass.Equals(notifyAttributeSymbol, SymbolEqualityComparer.Default));
 
-			var classMembers = classSymbol.GetMembers();
-			var classFields = classMembers.Where(m => !m.IsImplicitlyDeclared && !m.IsStatic && m.Kind == SymbolKind.Field)
-			.Cast<IFieldSymbol>();
+			var classMembers = classSymbol.GetMembers().Where(m => !m.IsImplicitlyDeclared && !m.IsStatic);
+			var classFields = classMembers.Where(m => m.Kind == SymbolKind.Field && !m.IsAbstract && m.IsDefinition)
+			.Cast<IFieldSymbol>()
+			.Where(f => !f.IsConst && !f.IsReadOnly && !f.IsVolatile);
 
 			if (classNotifyAttributes.Any())
 			{
@@ -115,7 +116,20 @@ namespace {classSymbol.ContainingNamespace}
 				notifySource.AppendLine("\t{");
 			}
 
-	notifySource.AppendLine("\t\tprotected void NotifyOfChange(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));");
+			var notifyMethod = classMembers.FirstOrDefault(m => m.Kind == SymbolKind.Method && m.Name == "NotifyOfChange"
+							&& (m as IMethodSymbol).Arity == 1 && (m as IMethodSymbol).Parameters.First().Type.Name == typeof(string).Name);
+
+			string methodName;
+			if (notifyMethod != null)
+			{
+				methodName = "NotiFire_Fallback_Notify_Method";
+			}
+			else
+			{
+				methodName = "NotifyOfChange";
+			}
+
+			notifySource.AppendLine($"\t\tprotected void {methodName}(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));");
 
 			foreach (var field in classFields)
 			{
@@ -156,7 +170,7 @@ namespace {classSymbol.ContainingNamespace}
 		public {field.Type} {name}
 		{{
 			get => {field.Name};
-			set {{ {field.Name} = value; NotifyOfChange(nameof({name})); }}
+			set {{ {field.Name} = value; {methodName}(nameof({name})); }}
 		}}");
 				notifySource.AppendLine();
 			}
