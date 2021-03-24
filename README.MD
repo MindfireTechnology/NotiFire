@@ -1,7 +1,7 @@
 NotiFire
 =======
 
-FireMap is a Source Generator that creates automatic implementations of the INotifyPropertyChanged interface. For a given type, you can use the `Notify` attribute like this:
+NotiFire is a Source Generator that creates automatic implementations of the INotifyPropertyChanged interface. For a given type, you can use the `Notify` attribute like this:
 
 ```cs
 
