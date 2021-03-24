@@ -185,6 +185,11 @@ namespace {classSymbol.ContainingNamespace}
 					name = $"{field.Name}Property";
 				}
 
+				if (string.IsNullOrWhiteSpace(name))
+				{
+					name = $"{field.Name}Property";
+				}
+
 				notifySource.AppendLine($@"
 		public {field.Type} {name}
 		{{
