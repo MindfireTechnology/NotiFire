@@ -35,6 +35,13 @@ namespace NotiFire
 				var sourceModel = compilation.GetSemanticModel(classSyntax.SyntaxTree);
 				var sourceSymbol = sourceModel.GetDeclaredSymbol(classSyntax);
 
+				if (!sourceSymbol.GetAttributes().Any(a => a.AttributeClass.Equals(notifyAttributeSymbol, SymbolEqualityComparer.Default))
+					&& !sourceSymbol.GetMembers().Any(m => m.Kind == SymbolKind.Field
+														&& !m.IsImplicitlyDeclared && !m.IsStatic))
+				{
+					continue;
+				}
+
 				string notifyClassSource = BuildNotifyPartialClass(sourceSymbol, notifyAttributeSymbol, excludeAttributeSymbol, notifyInterfaceSymbol);
 
 				string hintName = $"{sourceSymbol.ContainingNamespace}.{sourceSymbol.Name}.Notify.g.cs";
@@ -116,8 +123,19 @@ namespace {classSymbol.ContainingNamespace}
 				notifySource.AppendLine("\t{");
 			}
 
+			var method_t = classMembers.FirstOrDefault(m => m.Name == "NotifyOfChange");
+
+			if (method_t != null)
+			{
+				bool isMethod = method_t.Kind == SymbolKind.Method;
+				bool arity = (method_t as IMethodSymbol).Arity == 1;
+				var parameters = (method_t as IMethodSymbol).Parameters.First();
+
+				bool firstIsString = parameters.Type.Name == typeof(string).Name;
+			}
+
 			var notifyMethod = classMembers.FirstOrDefault(m => m.Kind == SymbolKind.Method && m.Name == "NotifyOfChange"
-							&& (m as IMethodSymbol).Arity == 1 && (m as IMethodSymbol).Parameters.First().Type.Name == typeof(string).Name);
+							&& (m as IMethodSymbol).Parameters.Length == 1 && (m as IMethodSymbol).Parameters.First().Type.Name == typeof(string).Name);
 
 			string methodName;
 			if (notifyMethod != null)

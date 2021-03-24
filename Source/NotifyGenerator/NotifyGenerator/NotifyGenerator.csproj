@@ -6,7 +6,7 @@
 		<LangVersion>9</LangVersion>
 
 		<AssemblyName>NotiFire</AssemblyName>
-		<Version>1.0.1</Version>
+		<Version>1.0.3</Version>
 		<Description>NotiFire is a source generator that generates INotifyPropertyChanged implementations for indicated classes.</Description>
 		<PackageTags>CodeGenerators, notify, INotifyPropertyChanged, property changed, Mindfire</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -23,12 +23,12 @@
 		<Authors>Dan Beus, Nate Zaugg</Authors>
 		<Company>Mindfire Technology</Company>
 		<PackageIcon>Logo.png</PackageIcon>
-		<AssemblyVersion>1.0.1.0</AssemblyVersion>
-		<FileVersion>1.0.1.0</FileVersion>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
+		<FileVersion>1.0.3.0</FileVersion>
 		<PackageId>NotiFire</PackageId>
 		<Product>NotiFire</Product>
 		<RootNamespace>NotiFire</RootNamespace>
-		<PackageReleaseNotes>Moved attributes into their own project so the generator doesn't need to create them.</PackageReleaseNotes>
+		<PackageReleaseNotes>Fixed a bug where the generator was creating partial classes for all referenced classes, not just those where the class is using the generator.</PackageReleaseNotes>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>

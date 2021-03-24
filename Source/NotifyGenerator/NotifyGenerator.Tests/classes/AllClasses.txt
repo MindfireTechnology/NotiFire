@@ -1,10 +1,10 @@
-﻿using NotiFire.Abstractions;
-using Notifire;
+﻿using System;
+using NotiFire.Abstractions;
 
 namespace Tester.Models.AllFields
 {
 	[Notify]
-	public class Order
+	public partial class Order
 	{
 		public int IdField;
 		public decimal TotalField;
@@ -14,7 +14,7 @@ namespace Tester.Models.AllFields
 	}
 
 	[Notify]
-	public class User
+	public partial class User
 	{
 		public int _Id;
 		public string _FirstName;
@@ -26,7 +26,7 @@ namespace Tester.Models.AllFields
 	}
 
 	[Notify]
-	public class Purchase
+	public partial class Purchase
 	{
 		public int Id;
 		public DateTime Created;
@@ -37,7 +37,7 @@ namespace Tester.Models.AllFields
 namespace Tester.Models.AllFields.Exclude
 {
 	[Notify]
-	public class Order
+	public partial class Order
 	{
 		public int IdField;
 		public decimal TotalField;
@@ -50,7 +50,7 @@ namespace Tester.Models.AllFields.Exclude
 	}
 
 	[Notify]
-	public class User
+	public partial class User
 	{
 		public int _Id;
 		public string _FirstName;
@@ -62,7 +62,7 @@ namespace Tester.Models.AllFields.Exclude
 	}
 
 	[Notify]
-	public class Purchase
+	public partial class Purchase
 	{
 		public int Id;
 		public DateTime Created;
@@ -72,7 +72,7 @@ namespace Tester.Models.AllFields.Exclude
 
 namespace Tester.Models.SpecificFields
 {
-	public class Order
+	public partial class Order
 	{
 		public int IdField;
 
@@ -86,7 +86,7 @@ namespace Tester.Models.SpecificFields
 		public int OrderId => IdField;
 	}
 
-	public class User
+	public partial class User
 	{
 		[Notify]
 		public int _Id;
@@ -104,7 +104,7 @@ namespace Tester.Models.SpecificFields
 		public string _Phone;
 	}
 
-	public class Purchase
+	public partial class Purchase
 	{
 		public int Id;
 		[Notify]
@@ -118,7 +118,7 @@ namespace Tester.Models.HasInterface
 {
 	using System.ComponentModel;
 
-	public class Order : System.ComponentModel.INotifyPropertyChanged
+	public partial class Order : System.ComponentModel.INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -135,7 +135,7 @@ namespace Tester.Models.HasInterface
 	}
 
 	[Notify]
-	public class User : System.ComponentModel.INotifyPropertyChanged
+	public partial class User : System.ComponentModel.INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -146,5 +146,7 @@ namespace Tester.Models.HasInterface
 		public string _City;
 		public string _ZipCode;
 		public string _Phone;
+
+		public void NotifyOfChange(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 }
