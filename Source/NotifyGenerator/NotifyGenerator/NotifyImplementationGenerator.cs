@@ -25,7 +25,7 @@ namespace NotiFire
 
 			var compilation = context.Compilation;
 
-			// get the newly bound attribute
+			// get the needed attributes
 			var notifyAttributeSymbol = compilation.GetTypeByMetadataName("NotiFire.Abstractions.NotifyAttribute");
 			var excludeAttributeSymbol = compilation.GetTypeByMetadataName("NotiFire.Abstractions.ExcludeAttribute");
 			var notifyInterfaceSymbol = context.Compilation.GetTypeByMetadataName("System.ComponentModel.INotifyPropertyChanged");
@@ -144,6 +144,12 @@ namespace {classSymbol.ContainingNamespace}
 				if (string.IsNullOrWhiteSpace(name))
 				{
 					name = $"{field.Name}Property";
+				}
+
+				string comments = field.GetDocumentationCommentXml();
+				if (!string.IsNullOrWhiteSpace(comments))
+				{
+					notifySource.AppendLine(comments);
 				}
 
 				notifySource.AppendLine($@"
