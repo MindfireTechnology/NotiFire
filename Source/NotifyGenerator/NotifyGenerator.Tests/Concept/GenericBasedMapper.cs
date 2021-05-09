@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NotifyGenerator.Tests.Concept
+﻿namespace NotifyGenerator.Tests.Concept
 {
 	public class GenericBasedMapper
 	{
-		public TOut MapTo<TOut>(NotifyGenerator.Tests.Concept.Entity.Order value) where TOut : class, new()
+		public TOut MapTo<TOut>(Entity.Order value) where TOut : class, new()
 		{
 			// All of the mappings with `NotifyGenerator.Tests.Concept.Entity` as input,
 			// which output should we choose?
@@ -17,7 +13,7 @@ namespace NotifyGenerator.Tests.Concept
 				return new TOut();
 			}
 
-			return default(TOut);
+			return default;
 		}
 	}
 }

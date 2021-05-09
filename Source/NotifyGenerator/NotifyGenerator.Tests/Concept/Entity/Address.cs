@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NotifyGenerator.Tests.Concept.Entity
+﻿namespace NotifyGenerator.Tests.Concept.Entity
 {
 	public class Address
 	{

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NotifyGenerator.Tests.Concept.Model
+﻿namespace NotifyGenerator.Tests.Concept.Model
 {
 	public class User
 	{
