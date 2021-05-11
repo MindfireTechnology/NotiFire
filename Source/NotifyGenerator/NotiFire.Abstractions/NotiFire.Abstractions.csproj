@@ -16,6 +16,8 @@
 	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
 	  <IncludeSymbols>true</IncludeSymbols>
 	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	  <SignAssembly>true</SignAssembly>
+	  <AssemblyOriginatorKeyFile>$(SolutionDir)NotiFire.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

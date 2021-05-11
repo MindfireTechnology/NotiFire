@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NotifyGenerator
+﻿namespace NotifyGenerator
 {
 	public static class SyntaxExtensions
 	{
