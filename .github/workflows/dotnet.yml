@@ -12,7 +12,6 @@ jobs:
       matrix:
         runs-on: [ubuntu-latest, windows-latest]
         configuration: [Release, Debug]
-        dotnet-version: [3.1.x]
 
     runs-on: ${{ matrix.runs-on }}
 
@@ -21,13 +20,27 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
       working-directory: Source/NotifyGenerator
     - name: Build
       run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
       working-directory: Source/NotifyGenerator
+
+  test:
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, windows-latest]
+    
+    runs-on: ${{ matrix.runs-on }}
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
     - name: Test
       run: dotnet test --no-build --verbosity normal
       working-directory: Source/NotifyGenerator
