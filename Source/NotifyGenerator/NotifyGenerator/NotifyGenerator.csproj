@@ -6,7 +6,7 @@
 		<LangVersion>9</LangVersion>
 
 		<AssemblyName>NotiFire</AssemblyName>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<Description>NotiFire is a source generator that generates INotifyPropertyChanged implementations for indicated classes.</Description>
 		<PackageTags>CodeGenerators, notify, INotifyPropertyChanged, property changed, Mindfire</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -16,6 +16,7 @@
 
 		<!-- Do not include the generator as a lib dependency -->
 		<IncludeBuildOutput>false</IncludeBuildOutput>
+
 		<PackageProjectUrl>https://github.com/MindfireTechnology/NotiFire</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/MindfireTechnology/NotiFire</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -23,12 +24,12 @@
 		<Authors>Dan Beus, Nate Zaugg</Authors>
 		<Company>Mindfire Technology</Company>
 		<PackageIcon>Logo.png</PackageIcon>
-		<AssemblyVersion>1.0.3.0</AssemblyVersion>
-		<FileVersion>1.0.3.0</FileVersion>
+		<AssemblyVersion>1.0.4.0</AssemblyVersion>
+		<FileVersion>1.0.4.0</FileVersion>
 		<PackageId>NotiFire</PackageId>
 		<Product>NotiFire</Product>
 		<RootNamespace>NotiFire</RootNamespace>
-		<PackageReleaseNotes>Fixed a bug where the generator was creating partial classes for all referenced classes, not just those where the class is using the generator.</PackageReleaseNotes>
+		<PackageReleaseNotes>Added a signed key for strongly typed assemblies (PR from WildCard65)</PackageReleaseNotes>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -41,9 +42,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="bin\**" />
-	  <EmbeddedResource Remove="bin\**" />
-	  <None Remove="bin\**" />
+		<Compile Remove="bin\**" />
+		<EmbeddedResource Remove="bin\**" />
+		<None Remove="bin\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,22 +59,18 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" />
+		<PackageReference Include="NotiFire.Abstractions" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="bin\Release\netstandard2.0\NotifyGenerator.dll" />
+		<None Remove="bin\Release\netstandard2.0\NotifyGenerator.dll" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 		<None Include="..\..\..\Resources\Logo.png">
-		  <Pack>True</Pack>
-		  <PackagePath></PackagePath>
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
 		</None>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\NotiFire.Abstractions\NotiFire.Abstractions.csproj" />
-	</ItemGroup>
-
 </Project>
