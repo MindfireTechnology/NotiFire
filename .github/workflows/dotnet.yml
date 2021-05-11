@@ -29,6 +29,7 @@ jobs:
       working-directory: Source/NotifyGenerator
 
   test:
+    needs: build
     strategy:
       matrix:
         runs-on: [ubuntu-latest, windows-latest]
