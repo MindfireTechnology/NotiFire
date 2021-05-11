@@ -12,7 +12,7 @@ jobs:
       matrix:
         runs-on: [ubuntu-latest, windows-latest]
         configuration: [Release, Debug]
-        dotnet-version: [5.0.202]
+        dotnet-version: [3.1.x]
 
     runs-on: ${{ matrix.runs-on }}
 
