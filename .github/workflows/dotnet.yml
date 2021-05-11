@@ -1,0 +1,30 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, windows-latest]
+        configuration: [Release, Debug]
+        dotnet-version: [5.0.x]
+
+    runs-on: ${{ matrix.runs-on }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
